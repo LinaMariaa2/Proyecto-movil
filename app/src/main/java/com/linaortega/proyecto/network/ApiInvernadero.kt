@@ -8,5 +8,4 @@ interface ApiInvernadero {
 
     @GET("api/invernadero")
     suspend fun getInvernaderos(): Response<List<Invernadero>>
-
 }

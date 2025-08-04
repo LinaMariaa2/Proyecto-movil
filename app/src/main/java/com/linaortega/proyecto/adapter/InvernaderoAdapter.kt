@@ -13,11 +13,11 @@ import com.linaortega.proyecto.model.Invernadero
 import com.linaortega.proyecto.ui.view.ZonaActivity
 
 class InvernaderoAdapter(
-    private val context: Context,
-    private val data: List<Invernadero>
+    private val context: Context, // constructor
+    private val data: List<Invernadero> // trae la lista de invernaderos
 ) : BaseAdapter() {
 
-    override fun getCount(): Int = data.size
+    override fun getCount(): Int = data.size // Devuelve cuántos elementos hay en la lista
     override fun getItem(position: Int): Any = data[position]
     override fun getItemId(position: Int): Long = data[position].id_invernadero.toLong()
 
@@ -30,22 +30,25 @@ class InvernaderoAdapter(
         val zonasTotales = view.findViewById<TextView>(R.id.tvZonasTotalesInv)
         val zonasActivas = view.findViewById<TextView>(R.id.tvZonasActivas)
         val btnInvZonas = view.findViewById<Button>(R.id.btnInvZonas)
-
         val invernadero = data[position]
 
+        //Asigna las propiedades al listview
         nombre.text = invernadero.nombre
         descripcion.text = invernadero.descripcion
         estado.text = "Estado: ${invernadero.estado}"
         zonasTotales.text = "Zonas Totales: ${invernadero.zonas_totales}"
         zonasActivas.text = "Zonas Activas: ${invernadero.zonas_activas}"
 
+        //Evento click para ir a la gestion de las zonas
         btnInvZonas.setOnClickListener {
-            val intent = Intent(context, ZonaActivity::class.java).apply {
+            val intent = Intent(context, ZonaActivity::class.java).apply { //(aply) permite ejecutar acciones sobre el objeto recién creado
                 putExtra("id_invernadero", invernadero.id_invernadero)
+                // añade un dato adicional al intent, el id del invernadero lo que nos servira mas adelante
             }
             context.startActivity(intent)
         }
-
+        //cuando trabaamos con un adpter significa que estamos trabajando sobre una clase externa y por eso
+        // no tendra todos los metodos que una normal y no podria saber desde donde estamos navegando mejordicho no accederia este metodo
         return view
     }
 }

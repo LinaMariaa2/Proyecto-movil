@@ -1,7 +1,7 @@
 package com.linaortega.proyecto.ui.view
 
 import android.content.Intent
-import android.os.Bundle
+import android.os.Bundle //es donde vienen los datos al iniciar la pantalla.
 import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
@@ -19,8 +19,8 @@ import kotlinx.coroutines.launch
 
 class InvernaderoActivity : AppCompatActivity() {
 
-    private lateinit var listView: ListView
-
+    private lateinit var listView: ListView //Declara una variable listView que luego se va a conectar con el xml
+    //lateinit te permite no inicializarla en ese momento, sino en onCreate.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_invernadero)
@@ -29,7 +29,7 @@ class InvernaderoActivity : AppCompatActivity() {
 
 
         // Llamar a la API
-        lifecycleScope.launch {
+        lifecycleScope.launch { // para implemnetra una corutina
             try {
                 val response = ApiClient.getClient().create(ApiInvernadero::class.java).getInvernaderos()
                 if (response.isSuccessful && response.body() != null) {
